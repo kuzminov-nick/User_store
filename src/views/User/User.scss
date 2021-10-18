@@ -1,0 +1,36 @@
+.user {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 50px;
+    text-align: left;
+}
+.user-img {
+    display: block;
+    margin-bottom: 30px;
+}
+.user-fields {
+    margin-bottom: 20px;
+}
+.user-field {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    &__input {
+        width: 100%;
+    }
+}
+.user-btns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__item {
+        width: calc(50% - 10px);
+        margin: 5px 0;
+        &_full {
+            width: 100%;
+        }
+    }
+}
