@@ -27,71 +27,94 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { ref, computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router'
+
 export default {
     props: ['id'],
-    data:() => ({
-        firstName: '',
-        lastName: '',
-        email: '',
-    }),
-    async created() {
-        await this.getUsersData();
-    },
-    mounted() {
-        if(this.id) {
-            this.firstName = this.userData.first_name;
-            this.lastName = this.userData.last_name;
-            this.email = this.userData.email;
+
+    setup(props) {
+        const store = useStore();
+        const router = useRouter();
+
+        if(props.id) {
+            store.dispatch('users/getUsersData');
         }
-        this.$refs.firstInput.focus();
-    },
-    computed: {
-        ...mapGetters('users', ['user']),
-        userData() {
-            return this.user(+this.id);
-        },
-        fullName() {
-            return `${this.userData.first_name} ${this.userData.last_name}`
-        }
-    },
-    methods: {
-        ...mapActions('users', ['getUsersData', 'addUser', 'updateUser', 'deleteUser']),
-        async onClickUpdate() {
+
+        const firstName = ref('');
+        const lastName = ref('');
+        const email = ref('');
+
+        const firstInput = ref(null);
+
+        const user = computed(() => store.getters['users/user']);
+        const userData = computed(() => user.value(+props.id));
+
+        const fullName = computed(() => `${userData.value.first_name} ${userData.value.last_name}`);
+
+        onMounted(() => {
+            if(props.id) {
+                firstName.value = userData.value.first_name;
+                lastName.value = userData.value.last_name;
+                email.value = userData.value.email;
+            }
+
+            firstInput.value.focus();
+        });
+
+        function onClickUpdate() {
             try {
-                await this.updateUser(
+                store.dispatch('users/updateUser',
                     {
-                        "id": this.id,
+                        "id": props.id,
                         "userObject": {
-                            "first_name": this.firstName,
-                            "last_name": this.lastName,
-                            "email": this.email
+                            "first_name": firstName.value,
+                            "last_name": lastName.value,
+                            "email": email.value
                         }
                     });
             } catch (e) {
                 console.error(e);
             }
-        },
-        async onClickCreate() {
+        }
+
+        function onClickCreate() {
             try {
-                await this.addUser({
-                    "first_name": this.firstName,
-                    "last_name": this.lastName,
-                    "email": this.email
+                store.dispatch('users/addUser',
+                    {
+                    "first_name": firstName.value,
+                    "last_name": lastName.value,
+                    "email": email.value
                 });
+                router.push({name: 'Home'});
             } catch (e) {
                 console.error(e);
             }
-        },
-        async onClickDelete(id) {
+        }
+
+        function onClickDelete(id) {
             try {
-                await this.deleteUser(id);
-                this.$router.push({name: 'Home'});
+                store.dispatch('users/deleteUser', id);
+                router.push({name: 'Home'});
             } catch (e) {
                 console.error(e);
             }
-        },
-    }
+        }
+
+        return {
+            firstName,
+            lastName,
+            email,
+            firstInput,
+            user,
+            userData,
+            fullName,
+            onClickUpdate,
+            onClickCreate,
+            onClickDelete
+        };
+    },
 }
 </script>
 

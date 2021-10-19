@@ -10,7 +10,6 @@ export default {
     getters: {
         usersData: state => state.usersData,
         user(state){
-            console.log(state.usersData.data);
             return function(id){
                 return state.usersData.data.find(user => +user.id === id);
             }
@@ -22,7 +21,6 @@ export default {
             state.usersData = payload;
         },
         addUser(state, payload) {
-            console.log(payload);
             state.usersData.data.push(payload);
         },
         updateUser(state, payload) {

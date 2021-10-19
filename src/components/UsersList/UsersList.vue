@@ -18,32 +18,33 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
     name: "UsersList",
+    setup(){
+        const store = useStore();
 
-    async created() {
-        await this.getUsersData();
-    },
+        store.dispatch('users/getUsersData');
 
-    computed: {
-        ...mapGetters('users', ['usersData']),
-        users() {
-            return this.usersData.data;
-        }
-    },
+        const usersData = computed(() => store.getters['users/usersData']);
+        const users = computed(() => usersData.value.data);
 
-    methods: {
-        ...mapActions('users', ['getUsersData', 'deleteUser']),
-        async onClickDelete(id) {
+        function onClickDelete(id) {
             try {
-                await this.deleteUser(id);
+                store.dispatch('users/deleteUser', id);
             } catch (e) {
                 console.error(e);
             }
-        },
-    }
+        }
+
+        return {
+            usersData,
+            users,
+            onClickDelete
+        };
+    },
 }
 </script>
 
