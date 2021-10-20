@@ -23,4 +23,9 @@ export default {
         margin: 0 auto;
         padding: 50px 20px;
     }
+
+    .add-user-btn {
+        display: block;
+        text-transform: uppercase;
+    }
 </style>

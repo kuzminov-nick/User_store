@@ -12,29 +12,3 @@
         margin-bottom: 30px;
     }
 }
-
-.user-item {
-    width: 50%;
-    padding: 0 10px;
-    font-size: 16px;
-    line-height: 20px;
-    &__name {
-        display: block;
-        margin-bottom: 10px;
-    }
-    &__mail {
-        display: block;
-        font-size: 14px;
-        color: #000;
-        margin-bottom: 20px;
-    }
-    &__img-wrap {
-        display: block;
-        margin: 0 auto 10px;
-    }
-}
-
-.add-user-btn {
-    display: block;
-    text-transform: uppercase;
-}
