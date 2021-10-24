@@ -45,9 +45,9 @@ export default {
         // },
     },
     actions: {
-        async getUsersData({ commit }) {
+        async getUsersData({ commit }, page) {
             await axios
-                .get(url)
+                .get(`${url}?page=${page}`)
                 .then(({ data }) => commit('putUsersData', data));
         },
         async addUser({ commit }, userData) {

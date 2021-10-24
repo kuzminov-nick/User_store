@@ -5,10 +5,16 @@ import E404 from '../views/E404.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/:page',
     name: 'Home',
-    component: Home
+    component: Home,
+    props: true
   },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
   {
     name: 'user',
     path: '/user/:id',
@@ -26,7 +32,7 @@ const routes = [
     path: '/:pathMatch(.*)',
     component: E404
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

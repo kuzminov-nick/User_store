@@ -15,23 +15,23 @@
 
 <script>
 
-import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 import UserItem from '@/components/UserItem/UserItem.vue'
 
 export default {
     name: "UsersList",
+    props: {
+        users: {
+            type: Object,
+            default: () => {}
+        }
+    },
     components: {
         UserItem
     },
     setup(){
         const store = useStore();
-
-        store.dispatch('users/getUsersData');
-
-        const usersData = computed(() => store.getters['users/usersData']);
-        const users = computed(() => usersData.value.data);
 
         function onClickDelete(id) {
             try {
@@ -42,8 +42,6 @@ export default {
         }
 
         return {
-            usersData,
-            users,
             onClickDelete
         };
     },

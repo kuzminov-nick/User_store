@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-link :to="`/`">main page</router-link>
+    <router-link :to="`/1`">main page</router-link>
     <router-view/>
   </div>
 </template>

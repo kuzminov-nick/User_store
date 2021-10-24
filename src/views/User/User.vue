@@ -21,7 +21,7 @@
             <button type="button" @click="id ? onClickUpdate() : onClickCreate()" class="btn btn-success user-btns__item" :class="{'user-btns__item_full': !id}">
                 {{id ? 'Update' : 'Add' }} user
             </button>
-            <router-link :to="`/`" class="btn btn-primary user-btns__item user-btns__item_full">go back</router-link>
+            <router-link :to="`/1`" class="btn btn-primary user-btns__item user-btns__item_full">Cancel</router-link>
         </div>
     </div>
 </template>
@@ -87,7 +87,7 @@ export default {
                     "last_name": lastName.value,
                     "email": email.value
                 });
-                router.push({name: 'Home'});
+                router.push({path: '/1'});
             } catch (e) {
                 console.error(e);
             }
@@ -96,7 +96,7 @@ export default {
         function onClickDelete(id) {
             try {
                 store.dispatch('users/deleteUser', id);
-                router.push({name: 'Home'});
+                router.push({path: '/1'});
             } catch (e) {
                 console.error(e);
             }

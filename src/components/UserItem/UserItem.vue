@@ -7,7 +7,7 @@
         <router-link :to="`/user/${id}`" class="user-item__img-wrap">
             <img :src="avatar" alt="" class="user-item__img">
         </router-link>
-        <button type="button" @click="onClickDelete(id)" class="btn btn-danger">Delete user</button>
+        <button type="button" @click="onClickDelete(id)" class="btn btn-danger user-item__delete-btn">Delete user</button>
     </div>
 </template>
 
