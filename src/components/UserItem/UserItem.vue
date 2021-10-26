@@ -1,10 +1,10 @@
 <template>
     <div class="user-item">
-        <router-link :to="`/user/${id}`" class="user-item__name">
+        <router-link :to="`/user/${page}/${id}`" class="user-item__name">
             {{ first_name }} {{ last_name }}
         </router-link>
         <a :href="'mailto:' + email" class="user-item__mail">{{ email }}</a>
-        <router-link :to="`/user/${id}`" class="user-item__img-wrap">
+        <router-link :to="`/user/${page}/${id}`" class="user-item__img-wrap">
             <img :src="avatar" alt="" class="user-item__img">
         </router-link>
         <button type="button" @click="onClickDelete(id)" class="btn btn-danger user-item__delete-btn">Delete user</button>
@@ -15,6 +15,10 @@
     export default {
         name: "UserItem",
         props: {
+            page: {
+                type: String,
+                default: null
+            },
             id: {
                 type: Number,
                 default: null

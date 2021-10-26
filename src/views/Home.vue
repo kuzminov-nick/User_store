@@ -1,8 +1,8 @@
 <template>
     <div class="home">
-        <UsersList :users="users"></UsersList>
+        <UsersList :users="users" :page="page"></UsersList>
         <div class="pagination home__pagination">
-            <div class="btn btn-outline-primary pagination__item" ref="domPages" v-for="(item, index) in totalPages" :key="index" @click="goToPage(index + 1)" :class="{'pagination__item_active': index + 1 == page}">
+            <div class="btn btn-outline-primary pagination__item" v-for="(item, index) in totalPages" :key="index" @click="goToPage(index + 1)" :class="{'pagination__item_active': index + 1 == page}">
                 {{ index + 1 }}
             </div>
         </div>
@@ -11,7 +11,7 @@
 
 <script>
 // @ is an alias to /src
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router'
 
@@ -27,13 +27,13 @@ export default {
         const store = useStore();
         const router = useRouter();
 
-        store.dispatch('users/getUsersData', props.page);
+        if(!Object.keys(store.getters['users/usersData']).length) {
+            store.dispatch('users/getUsersData', props.page);
+        }
 
         const usersData = computed(() => store.getters['users/usersData']);
         const users = computed(() => usersData.value.data);
         const totalPages = computed(() => usersData.value.total_pages);
-        const domPages = ref(null);
-        console.log(domPages.value);
 
         function goToPage(page) {
             router.push({name: 'Home', params: { page: page }});
@@ -44,7 +44,6 @@ export default {
             usersData,
             users,
             totalPages,
-            domPages,
             goToPage
         }
     }

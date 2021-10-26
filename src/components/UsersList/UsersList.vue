@@ -4,6 +4,7 @@
             <UserItem
                     v-for="(user, index) in users"
                     :key="index"
+                    :page="page"
                     v-bind="user"
                     @on-click-delete="onClickDelete"
                     class="users-list__item">
@@ -22,6 +23,10 @@ import UserItem from '@/components/UserItem/UserItem.vue'
 export default {
     name: "UsersList",
     props: {
+        page: {
+            type: String,
+            default: '',
+        },
         users: {
             type: Object,
             default: () => {}
