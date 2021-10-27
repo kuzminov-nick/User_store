@@ -11,11 +11,11 @@ export default {
     },
     getters: {
         usersData: state => state.usersData,
-        user(state){
-            return function(id){
-                return state.usersData.data.find(user => +user.id === id);
-            }
-        },
+        // user(state){
+        //     return function(id){
+        //         return state.usersData.data.find(user => +user.id === id);
+        //     }
+        // },
         singleUser: state => state.singleUser,
     },
     mutations: {

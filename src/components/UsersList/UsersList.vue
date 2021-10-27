@@ -1,12 +1,12 @@
 <template>
     <div class="users-list-wrap">
+        <h1><slot></slot></h1>
         <div class="users-list">
             <UserItem
                     v-for="(user, index) in users"
                     :key="index"
                     :page="page"
                     v-bind="user"
-                    @on-click-delete="onClickDelete"
                     class="users-list__item">
             </UserItem>
         </div>
@@ -15,9 +15,6 @@
 </template>
 
 <script>
-
-import { useStore } from 'vuex';
-
 import UserItem from '@/components/UserItem/UserItem.vue'
 
 export default {
@@ -34,21 +31,6 @@ export default {
     },
     components: {
         UserItem
-    },
-    setup(){
-        const store = useStore();
-
-        function onClickDelete(id) {
-            try {
-                store.dispatch('users/deleteUser', id);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        return {
-            onClickDelete
-        };
     },
 }
 </script>

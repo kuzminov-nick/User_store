@@ -12,6 +12,9 @@
 </template>
 
 <script>
+    import { useStore } from 'vuex';
+    import { useRouter } from 'vue-router'
+
     export default {
         name: "UserItem",
         props: {
@@ -40,10 +43,24 @@
                 default: ''
             },
         },
-        methods: {
-            onClickDelete(id) {
-                this.$emit('on-click-delete', id);
+        setup(){
+            const store = useStore();
+            const router = useRouter();
+
+            function onClickDelete(id) {
+                try {
+                    store.dispatch('users/deleteUser', id);
+                    back();
+                } catch (e) {
+                    console.error(e);
+                }
             }
+
+            function back() {
+                router.back()
+            }
+
+            return {onClickDelete, back}
         }
     }
 </script>

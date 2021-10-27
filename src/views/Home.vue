@@ -1,6 +1,8 @@
 <template>
     <div class="home">
-        <UsersList :users="users" :page="page"></UsersList>
+        <UsersList :users="users" :page="page">
+            List of users
+        </UsersList>
         <div class="pagination home__pagination">
             <div class="btn btn-outline-primary pagination__item" v-for="(item, index) in totalPages" :key="index" @click="goToPage(index + 1)" :class="{'pagination__item_active': index + 1 == page}">
                 {{ index + 1 }}

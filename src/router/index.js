@@ -10,11 +10,6 @@ const routes = [
     component: Home,
     props: true
   },
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
   {
     name: 'user',
     path: '/user/:page/:id',
@@ -37,6 +32,6 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
 export default router

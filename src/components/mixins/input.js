@@ -21,4 +21,9 @@ export const input = {
             default: null,
         },
     },
+    methods: {
+        onInput(e) {
+            this.$emit('input', e);
+        }
+    }
 };

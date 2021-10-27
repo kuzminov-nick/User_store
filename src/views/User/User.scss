@@ -12,14 +12,10 @@
     margin-bottom: 20px;
 }
 .user-field {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    &:not(:last-child) {
-        margin-bottom: 10px;
-    }
     &__input {
-        width: 100%;
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
     }
 }
 .user-btns {

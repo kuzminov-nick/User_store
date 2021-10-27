@@ -9,22 +9,10 @@
 import { input } from '@/components/mixins/input'
 export default {
     name: "input",
-    mixins: [input],
-    methods: {
-        onInput(e) {
-            this.$emit('input', e);
-        }
-    }
+    mixins: [input]
 }
 </script>
 
 <style lang="scss">
-    .field {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-        &__input {
-             width: 100%;
-        }
-    }
+    @import "Input";
 </style>
